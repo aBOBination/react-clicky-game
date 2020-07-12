@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   font-family: sans-serif;
 }
@@ -42,4 +42,4 @@ html, body, #root {
 
 .card > .content > ul > li {
   margin-top: 18px;
-}
+} */

@@ -11,3 +11,14 @@
   align-content: flex-start;
   overflow: auto;
 }
+
+
+
+@media screen and (min-width: 900px) {
+  .wrapper {
+
+    padding-left: 0 ;
+    padding-right: 0;
+
+  }
+}

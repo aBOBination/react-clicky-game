@@ -21,22 +21,6 @@ class ClickyCard extends React.Component {
         <div className="img-container">
           <img alt={profile.name} src={profile.image} />
         </div>
-        <div className="content">
-          <ul>
-            <li>
-              <strong>Name:</strong> {profile.name}
-            </li>
-            <li>
-              <strong>Occupation:</strong> {profile.occupation}
-            </li>
-            <li>
-              <strong>Address:</strong> {profile.location}
-            </li>
-          </ul>
-        </div>
-        <span className="remove" onClick={this.handleRemoveCard}>
-          𝘅
-        </span>
       </div>
     );
   }
