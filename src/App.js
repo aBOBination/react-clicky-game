@@ -48,7 +48,6 @@ class App extends React.Component {
   };
 
   changeMax = () => {
-    console.log(this.state.score + ' - ' + this.state.maxScore);
     if (this.state.score > this.state.maxScore) {
       this.setState({ maxScore: this.state.score });
     }
