@@ -1,14 +1,19 @@
 import React from 'react';
 import './style.css';
+import profiles from '../../../src/friends.json';
 
 class ClickyCard extends React.Component {
-  state = { clicked: false };
+  state = { clicked: this.props.clicked };
 
   handleClick = () => {
-    !this.state.clicked
-      ? this.props.changeScore(true)
-      : this.props.changeScore(false);
-    this.setState({ clicked: true });
+    if (!this.state.clicked) {
+      console.log(this.state.clicked);
+      this.props.changeScore(true);
+      this.setState({ clicked: true });
+    } else {
+      this.props.changeScore(false);
+      this.init(profiles);
+    }
   };
 
   render() {
@@ -19,9 +24,8 @@ class ClickyCard extends React.Component {
         role="img"
         aria-label="click item"
         className="click-item"
-        clicked={this.state.clicked}
         style={{ backgroundImage: `url(${profile.image})` }}>
-        {this.state.clicked.toString()}
+        {/* {this.props.clicked.toString()} */}
       </div>
     );
   }

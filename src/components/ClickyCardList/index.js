@@ -2,9 +2,18 @@ import React from 'react';
 import './style.css';
 import ClickyCard from '../ClickyCard/index';
 
-const CardList = (props) =>
-  props.profiles.map((profile) => (
-    <ClickyCard key={profile.id} changeScore={props.changeScore} {...profile} />
-  ));
+export default class CardList extends React.Component {
+  reset() {}
 
-export default CardList;
+  render() {
+    return this.props.profiles.map((profile) => (
+      <ClickyCard
+        key={profile.id}
+        score={this.props.score}
+        changeScore={this.props.changeScore}
+        init={this.init}
+        {...profile}
+      />
+    ));
+  }
+}
