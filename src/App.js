@@ -8,7 +8,7 @@ import Footer from './components/Footer/index';
 import profiles from './friends.json';
 import './App.css';
 
-class App extends React.Component {
+export default class App extends React.Component {
   state = { profiles: profiles, score: 0, maxScore: 0 };
 
   componentDidMount() {
@@ -71,5 +71,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
