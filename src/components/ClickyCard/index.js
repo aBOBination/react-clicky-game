@@ -1,18 +1,12 @@
 import React from 'react';
 import './style.css';
-import profiles from '../../../src/friends.json';
 
-class ClickyCard extends React.Component {
-  state = { clicked: this.props.clicked };
-
+export default class ClickyCard extends React.Component {
   handleClick = () => {
-    if (!this.state.clicked) {
-      console.log(this.state.clicked);
-      this.props.changeScore(true);
-      this.setState({ clicked: true });
+    if (!this.props.clicked) {
+      this.props.changeScore(true, this.props.id);
     } else {
       this.props.changeScore(false);
-      this.init(profiles);
     }
   };
 
@@ -24,11 +18,7 @@ class ClickyCard extends React.Component {
         role="img"
         aria-label="click item"
         className="click-item"
-        style={{ backgroundImage: `url(${profile.image})` }}>
-        {/* {this.props.clicked.toString()} */}
-      </div>
+        style={{ backgroundImage: `url(${profile.image})` }}></div>
     );
   }
 }
-
-export default ClickyCard;

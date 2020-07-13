@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-class Nav extends React.Component {
+export default class Nav extends React.Component {
   render() {
     return (
       <nav className="navbar">
@@ -10,10 +10,11 @@ class Nav extends React.Component {
             <a href="/">Clicky Game</a>
           </li>
           <li className="">Click an image to begin!</li>
-          <li>Score: {this.props.score} | Top Score: 0</li>
+          <li>
+            Score: {this.props.score} | Top Score: {this.props.maxScore}
+          </li>
         </ul>
       </nav>
     );
   }
 }
-export default Nav;

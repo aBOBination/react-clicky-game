@@ -9,30 +9,55 @@ import profiles from './friends.json';
 import './App.css';
 
 class App extends React.Component {
-  state = { profiles: profiles, score: 0, maxScore: 6 };
+  state = { profiles: profiles, score: 0, maxScore: 0 };
 
   componentDidMount() {
-    this.init(profiles);
-    this.setState({ score: 0 });
-    console.log(profiles);
+    this.changeClicked(false);
+    // this.setState({ score: 0 });
+    // console.log(profiles);
   }
 
-  init(profiles) {
-    profiles.forEach((profile) => {
-      profile.clicked = false;
-    });
-  }
+  changeScore = (status, id) => {
+    if (status) {
+      this.setState({ score: this.state.score + 1 });
+      this.changeClicked(status, id);
+    } else {
+      this.changeMax();
+      this.setState({ score: 0 });
+      this.changeClicked(status, id);
+    }
+  };
 
-  changeScore = (status) => {
-    status
-      ? this.setState({ score: this.state.score + 1 })
-      : this.setState({ score: 0 });
+  changeClicked = (status, id) => {
+    const resetProfiles = [];
+    if (status) {
+      this.state.profiles.forEach((profile) => {
+        if (profile.id === id) {
+          profile.clicked = true;
+        }
+        resetProfiles.push(profile);
+      });
+    } else {
+      this.state.profiles.forEach((profile) => {
+        profile.clicked = false;
+
+        resetProfiles.push(profile);
+      });
+    }
+    this.setState({ profiles: resetProfiles });
+  };
+
+  changeMax = () => {
+    console.log(this.state.score + ' - ' + this.state.maxScore);
+    if (this.state.score > this.state.maxScore) {
+      this.setState({ maxScore: this.state.score });
+    }
   };
 
   render() {
     return (
       <Wrapper>
-        <Nav score={this.state.score} />
+        <Nav score={this.state.score} maxScore={this.state.maxScore} />
         <Header />
         <Container>
           <ClickyCardList
