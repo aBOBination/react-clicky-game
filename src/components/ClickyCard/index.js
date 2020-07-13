@@ -2,13 +2,13 @@ import React from 'react';
 import './style.css';
 
 class ClickyCard extends React.Component {
-  state = { clicked: 'false' };
+  state = { clicked: false };
 
   handleClick = () => {
-    this.state.clicked === 'false'
-      ? this.setState({ clicked: 'true', score: this.props.score + 1 })
-      : this.setState({ clicked: 'false', score: 0 });
-    console.log(this.state);
+    !this.state.clicked
+      ? this.props.changeScore(true)
+      : this.props.changeScore(false);
+    this.setState({ clicked: true });
   };
 
   render() {
@@ -21,8 +21,7 @@ class ClickyCard extends React.Component {
         className="click-item"
         clicked={this.state.clicked}
         style={{ backgroundImage: `url(${profile.image})` }}>
-        {this.state.clicked}
-        {this.state.score}
+        {this.state.clicked.toString()}
       </div>
     );
   }
