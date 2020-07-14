@@ -9,12 +9,15 @@ import profiles from './friends.json';
 import './App.css';
 
 export default class App extends React.Component {
-  state = { profiles: profiles, score: 0, maxScore: 0 };
+  state = {
+    profiles: profiles,
+    score: 0,
+    maxScore: 0,
+    message: 'Click an image to begin!'
+  };
 
   componentDidMount() {
     this.changeClicked(false);
-    // this.setState({ score: 0 });
-    // console.log(profiles);
   }
 
   changeScore = (status, id) => {
@@ -36,15 +39,16 @@ export default class App extends React.Component {
           profile.clicked = true;
         }
         resetProfiles.push(profile);
+        this.setState({ message: 'You guessed correctly!' });
       });
     } else {
       this.state.profiles.forEach((profile) => {
         profile.clicked = false;
-
         resetProfiles.push(profile);
+        this.setState({ message: 'You guessed incorrectly!' });
       });
     }
-    this.setState({ profiles: resetProfiles });
+    this.setState({ profiles: this.shuffle(resetProfiles) });
   };
 
   changeMax = () => {
@@ -53,10 +57,28 @@ export default class App extends React.Component {
     }
   };
 
+  shuffle = (array) => {
+    var currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  };
+
   render() {
     return (
       <Wrapper>
-        <Nav score={this.state.score} maxScore={this.state.maxScore} />
+        <Nav
+          message={this.state.message}
+          score={this.state.score}
+          maxScore={this.state.maxScore}
+        />
         <Header />
         <Container>
           <ClickyCardList
